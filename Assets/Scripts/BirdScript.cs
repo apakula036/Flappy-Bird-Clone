@@ -8,19 +8,30 @@ using UnityEngine.SceneManagement;
 
 public class BirdScript : MonoBehaviour
 {
+    public UIDocument uiDocument;
     public GameObject Death_Explosion; 
     public Rigidbody2D myRigidbody;
+    private Button restartButton;
+    private Label scoreText;
+    private float elapsedTime = 0f;
+    public int score = 0;
+    public float scoreMultiplier = 10f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        scoreText = uiDocument.rootVisualElement.Q<Label>("ScoreLabel");
         gameObject.name = "bob_bird";
+        restartButton = uiDocument.rootVisualElement.Q<Button>("RestartButton");
+        restartButton.style.display = DisplayStyle.None;
+        restartButton.clicked += ReloadScene;
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateScore();
         //myRigidbody.linearVelocity = Vector2.up * 10;
         //float horizontal = 0.0f;
         if (Keyboard.current.leftArrowKey.isPressed)
@@ -52,10 +63,28 @@ public class BirdScript : MonoBehaviour
         //position.y = position.y + 0.1f * vertical;
         //transform.position = position;
     }
+    void UpdateScore()
+    {
+        elapsedTime += Time.deltaTime;
+        score = Mathf.FloorToInt(elapsedTime * scoreMultiplier);
+        scoreText.text = "Score: " + score;
+    }
     void OnCollisionEnter2D(Collision2D collision) 
     {
         Destroy(gameObject);
         Instantiate(Death_Explosion, transform.position, transform.rotation);
+        restartButton.style.display = DisplayStyle.Flex;
     }
+    void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+
+
+
+
+
 }
+
 

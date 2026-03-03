@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2858758232970510609}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.43, y: -4.23, z: 0}
+  m_LocalPosition: {x: 21, y: 6, z: 0}
   m_LocalScale: {x: 1.475, y: 8.108711, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -154,6 +154,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Block_Script
   Death_Explosion: {fileID: 8585234840432299134, guid: e553d43841152bf479282ec6b2f905ba, type: 3}
   myRigidbody: {fileID: 1355282927649796240}
+  MovingBlockOne: {fileID: 0}
+  MovingBlockTwo: {fileID: 0}
+  MovingBlockThree: {fileID: 0}
+  MovingBlockFour: {fileID: 0}
+  localScale: {x: 0, y: 0, z: 0}
+  xScaleValue: 1.475
+  minValue: 8
+  maxValue: 0
+  medianValue: 10
+  rightSpawnPosition: 26
+  bottomSpawnYValue: -7
+  topSpawnYValue: 7.71
+  pointToRespawnBlocks: -21
 --- !u!50 &1355282927649796240
 Rigidbody2D:
   serializedVersion: 5
