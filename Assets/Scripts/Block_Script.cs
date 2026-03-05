@@ -13,7 +13,20 @@ public class Block_Script : MonoBehaviour
     public Rigidbody2D MovingBlockTwo;
     public Rigidbody2D MovingBlockThree;
     public Rigidbody2D MovingBlockFour;
+    public Rigidbody2D MovingBlockOne;
+    public Rigidbody2D MovingBlockTwo;
+    public Rigidbody2D MovingBlockThree;
+    public Rigidbody2D MovingBlockFour;
     public Vector3 localScale;
+    public float xScaleValue = 1.475f;
+    public float minValue = 7.9f;
+    public float maxValue = 0f;
+    public float medianValue = 10f; 
+    public float rightSpawnPosition = 30f;
+    public float bottomSpawnYValue = -7f;
+    public float topSpawnYValue = 7.71f;
+    public float pointToRespawnBlocks = -21f;
+
     public float xScaleValue = 1.475f;
     public float minValue = 7.9f;
     public float maxValue = 0f;
@@ -29,16 +42,33 @@ public class Block_Script : MonoBehaviour
         //MovingBlockOne.name = "blockOne";
         MoveBlocks();
         
+        //MovingBlockOne.name = "blockOne";
+        MoveBlocks();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         CheckForBlockOne();
+        CheckForBlockOne();
     }
 
     void CheckForBlockOne(){
+    void CheckForBlockOne(){
         Vector2 position = transform.position;
+        float sizeYRangeForBlock = Random.Range(8.3f,13.5f);
+        float sizeXRangeForBlock = Random.Range(1.1f,3f);
+        if (position.x < pointToRespawnBlocks)
+        {
+            position.x = rightSpawnPosition;
+            transform.localScale = new Vector3(sizeXRangeForBlock, sizeYRangeForBlock, 1);
+            transform.position = position;
+            MoveBlocks();
+        } 
+    }
+    void MoveBlocks(){
+        //move the blocks to the left
         float sizeYRangeForBlock = Random.Range(8.3f,13.5f);
         float sizeXRangeForBlock = Random.Range(1.1f,3f);
         if (position.x < pointToRespawnBlocks)
@@ -69,6 +99,7 @@ public class Block_Script : MonoBehaviour
 
 void OnCollisionEnter2D(Collision2D collision) 
     {
+        //when it crashes into the backwall it explodes 
         Destroy(gameObject);
         Instantiate(Death_Explosion, transform.position, transform.rotation);
     }

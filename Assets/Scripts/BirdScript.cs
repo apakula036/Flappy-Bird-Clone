@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class BirdScript : MonoBehaviour
 {
     public UIDocument uiDocument;
+    public UIDocument uiDocument;
     public GameObject Death_Explosion; 
     public Rigidbody2D myRigidbody;
     private Button restartButton;
