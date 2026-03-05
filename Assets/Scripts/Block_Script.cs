@@ -56,8 +56,11 @@ public class Block_Script : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision) 
     {
         //when it crashes into the backwall it explodes 
-        Destroy(gameObject);
-        Instantiate(Death_Explosion, transform.position, transform.rotation);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            Instantiate(Death_Explosion, transform.position, transform.rotation);
+        }
     }
 
     
@@ -66,6 +69,7 @@ public class Block_Script : MonoBehaviour
 
 void OnCollisionEnter2D(Collision2D collision) 
     {
+        //when it crashes into the backwall it explodes 
         Destroy(gameObject);
         Instantiate(Death_Explosion, transform.position, transform.rotation);
     }
