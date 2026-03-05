@@ -13,30 +13,39 @@ public class BirdScript : MonoBehaviour
     public Rigidbody2D myRigidbody;
     private Button restartButton;
     private Label scoreText;
+    private Label highScoreText;
     private float elapsedTime = 0f;
     public int score = 0;
-    public float scoreMultiplier = 10f;
+    public float scoreMultiplier = 100f;
+    public static int highscore;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        highscore = PlayerPrefs.GetInt ("highscore", highscore);
+
         scoreText = uiDocument.rootVisualElement.Q<Label>("ScoreLabel");
+        highScoreText = uiDocument.rootVisualElement.Q<Label>("HighScoreLabel");
         gameObject.name = "bob_bird";
         restartButton = uiDocument.rootVisualElement.Q<Button>("RestartButton");
+        highScoreText.style.display = DisplayStyle.None;
         restartButton.style.display = DisplayStyle.None;
         restartButton.clicked += ReloadScene;
         
     }
+    
 
     // Update is called once per frame
     void Update()
     {
+        if (score > highscore){
+        highscore = score;
+        PlayerPrefs.SetInt ("highscore", highscore);
+        highScoreText.text = "Highscore: " + highscore;
+        }
         UpdateScore();
-        //myRigidbody.linearVelocity = Vector2.up * 10;
-        //float horizontal = 0.0f;
         if (Keyboard.current.leftArrowKey.isPressed)
         {
-            //horizontal = -1.0f;
             myRigidbody.linearVelocity = Vector2.left * 5;
         }
         else if (Keyboard.current.rightArrowKey.isPressed)
@@ -45,23 +54,10 @@ public class BirdScript : MonoBehaviour
         }
 
 
-        //float vertical = 0.0f;
         else if (Keyboard.current.upArrowKey.isPressed)
         {
-            //vertical = 1.0f;
             myRigidbody.linearVelocity = Vector2.up * 7;
         }
-        /* else if (Keyboard.current.downArrowKey.isPressed)
-        {
-            //vertical = -1.0f;
-            myRigidbody.linearVelocity = Vector2.down * 10;
-        } */ 
-
-
-        //Vector2 position = transform.position;
-        //position.x = position.x + 0.1f * horizontal;
-        //position.y = position.y + 0.1f * vertical;
-        //transform.position = position;
     }
     void UpdateScore()
     {
@@ -71,9 +67,22 @@ public class BirdScript : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision) 
     {
-        Destroy(gameObject);
-        Instantiate(Death_Explosion, transform.position, transform.rotation);
-        restartButton.style.display = DisplayStyle.Flex;
+        //check if the collision is a wall 
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+            Instantiate(Death_Explosion, transform.position, transform.rotation);
+            restartButton.style.display = DisplayStyle.Flex;
+            highScoreText.style.display = DisplayStyle.Flex;
+            highScoreText.text = "Highscore: " + highscore;
+        }
+        /* Future location for powerups? 
+        if (collision.gameObject.CompareTag("Powerup"))
+        {
+            Destroy(gameObject);
+            Instantiate(newCharacterProperties?, transform.position, transform.rotation);
+            restartButton.style.display = DisplayStyle.Flex;
+        }*/
     }
     void ReloadScene()
     {
