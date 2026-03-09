@@ -92,8 +92,12 @@ public class BirdScript : MonoBehaviour
 
 
 
-
-
 }
 
+/*
 
+Powerup to unlock the ability to fly left and right 
+
+
+
+*/
