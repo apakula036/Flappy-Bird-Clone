@@ -65,12 +65,6 @@ public class BirdScript : MonoBehaviour
         score = Mathf.FloorToInt(elapsedTime * scoreMultiplier);
         scoreText.text = "Score: " + score;
     }
-    void UpdateScore()
-    {
-        elapsedTime += Time.deltaTime;
-        score = Mathf.FloorToInt(elapsedTime * scoreMultiplier);
-        scoreText.text = "Score: " + score;
-    }
     void OnCollisionEnter2D(Collision2D collision) 
     {
         //check if the collision is a wall 
@@ -98,8 +92,12 @@ public class BirdScript : MonoBehaviour
 
 
 
-
-
 }
 
+/*
 
+Powerup to unlock the ability to fly left and right 
+
+
+
+*/
