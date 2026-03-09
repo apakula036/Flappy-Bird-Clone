@@ -18,10 +18,13 @@ public class BirdScript : MonoBehaviour
     public int score = 0;
     public float scoreMultiplier = 100f;
     public static int highscore;
+    AudioSource audioSource;
+    public AudioClip collectedClip;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioSource = GetComponent<Assets/AudioTracks/lowblip.wav>();
         highscore = PlayerPrefs.GetInt ("highscore", highscore);
 
         scoreText = uiDocument.rootVisualElement.Q<Label>("ScoreLabel");
@@ -57,6 +60,7 @@ public class BirdScript : MonoBehaviour
         else if (Keyboard.current.upArrowKey.isPressed)
         {
             myRigidbody.linearVelocity = Vector2.up * 7;
+            PlaySound();
         }
     }
     void UpdateScore()
@@ -64,6 +68,10 @@ public class BirdScript : MonoBehaviour
         elapsedTime += Time.deltaTime;
         score = Mathf.FloorToInt(elapsedTime * scoreMultiplier);
         scoreText.text = "Score: " + score;
+    }
+    public void PlaySound(AudioClip clip)
+    {
+    audioSource.PlayOneShot(clip);
     }
     void OnCollisionEnter2D(Collision2D collision) 
     {
