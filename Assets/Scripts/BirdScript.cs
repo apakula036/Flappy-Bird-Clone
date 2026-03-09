@@ -24,7 +24,7 @@ public class BirdScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        audioSource = GetComponent<Assets/AudioTracks/lowblip.wav>();
+        //audioSource = GetComponent<Assets/AudioTracks/lowblip.wav>();
         highscore = PlayerPrefs.GetInt ("highscore", highscore);
 
         scoreText = uiDocument.rootVisualElement.Q<Label>("ScoreLabel");
@@ -60,7 +60,7 @@ public class BirdScript : MonoBehaviour
         else if (Keyboard.current.upArrowKey.isPressed)
         {
             myRigidbody.linearVelocity = Vector2.up * 7;
-            PlaySound();
+            //PlaySound();
         }
     }
     void UpdateScore()
