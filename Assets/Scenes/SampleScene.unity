@@ -516,7 +516,7 @@ Transform:
   m_GameObject: {fileID: 373643531}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.64559, y: 0.28029, z: 0}
+  m_LocalPosition: {x: 0.64559, y: 5.3, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -539,6 +539,7 @@ MonoBehaviour:
   myRigidbody: {fileID: 373643535}
   score: 0
   scoreMultiplier: 100
+  collectedClip: {fileID: 8300000, guid: cca40008dd494d2449889c71d454059d, type: 3}
 --- !u!50 &373643535
 Rigidbody2D:
   serializedVersion: 5
@@ -615,7 +616,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: cca40008dd494d2449889c71d454059d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.731
   m_Pitch: 1
   Loop: 0
   Mute: 0
